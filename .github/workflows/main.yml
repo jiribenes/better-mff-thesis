@@ -29,10 +29,10 @@ jobs:
     name: Verify PDF/A
     runs-on: ubuntu-latest
     needs: build
-
+  
     steps:
       - name: Get PDFs
         uses: actions/download-artifact@v5
       - name: Run VeraPDF in Docker
         run: |
-          docker run --rm -v $PWD/Thesis:/pdfs ghcr.io/mff-cuni-cz/cuni-thesis-validator verify /pdfs/*.pdf | tee /dev/stderr | grep -qE 'nonCompliant="0" failedJobs="0"'
+          docker run --rm -v $PWD/Thesis:/pdfs ghcr.io/mff-cuni-cz/cuni-thesis-validator sh -c "verify /pdfs/*.pdf" | tee /dev/stderr | grep -qE 'nonCompliant="0" failedJobs="0"'
