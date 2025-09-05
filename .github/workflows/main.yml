@@ -15,7 +15,7 @@ jobs:
     container: { image: 'aergus/latex' }
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
       - name: Build the thesis
         run: latexmk thesis && latexmk abstract-cz && latexmk abstract-en
       - name: Upload artifacts
@@ -33,6 +33,6 @@ jobs:
 
     steps:
       - name: Get PDFs
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v4
       - name: Run VeraPDF
         run: verify Thesis/*.pdf | tee /dev/stderr | grep -qE 'nonCompliant="0" failedJobs="0"'
